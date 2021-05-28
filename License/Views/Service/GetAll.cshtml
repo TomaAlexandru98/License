@@ -1,0 +1,183 @@
+﻿@model License.Service.Logic.ViewModels.Services.ServicesViewModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="~/css/home.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+<partial name="_CategoriesNavigation" model="@Model.Categories" />
+
+<div class="services-container">
+    <div class="mb-3">
+        <div class="mb-2">
+            <a class="services-current-page-link" asp-controller="Service" asp-action="GetAll">
+                HOME
+            </a>
+            <i class="fa fa-angle-right mr-2"></i>
+
+            @if (Model.ShouldDisplayData)
+            {
+                <a class="services-current-page-link" asp-controller="Service" asp-action="GetAll" asp-route-categoryId="@Model.CategoryId">
+                    @Model.CategoryName.ToUpper()
+                </a>
+                <i class="fa fa-angle-right"></i>
+            }
+        </div>
+        @if (Model.ShouldDisplayData)
+        {
+            <div class="services-current-subcategories-title">
+                @Model.Title
+            </div>
+            <div class="services-current-subcategories-description">
+                @Model.Description
+            </div>
+        }
+        <partial name="_FilterServices" />
+        <div class="services-number-results">
+            @Model.NumberOfResult services available
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap">
+        @foreach (var service in Model.Services)
+        {
+            <div class="service-card card" id="@service.Id">
+                <a asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                    <img src="~/ServiceImages/@service.Image" class="service-card-img">
+                </a>
+                <div class="p-3">
+                    <div class="service-card-body">
+                        <img class="service-card-body-img" src="images/1_mk1-6aYaf_Bes1E3Imhc0A.jpeg" height="25" width="25" />
+                        <span class="service-card-body-user">
+                            <span>
+                                @service.User.FirstName
+                            </span>
+                            <span>
+                                @service.User.LastName
+                            </span>
+                        </span>
+                    </div>
+                    <div class="mt-2" style="height: 3vw;">
+                        <a class="service-card-body-preview" asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                            @service.Preview
+                        </a>
+                    </div>
+                    <div class="service-card-rating-body">
+                        <i class="fa fa-star checked service-card-rating-star"></i>
+                        <span class="service-card-rating-value">
+                            5.0
+                        </span>
+                        <span class="service-card-rating-numbers">
+                            (50)
+                        </span>
+                    </div>
+                </div>
+                <div class="service-card-line"></div>
+                <div class="d-flex p-3">
+                    <div class="mr-auto">
+                        <a style="cursor: pointer;" asp-controller="" asp-action="">
+                            <i class="fa fa-heart service-card-heart-icon"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="service-card-price" asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                            <span style="font-size: 14px;">STARTING AT</span>
+                            <span style="font-size: 18px;">$@service.Price</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        @foreach (var service in Model.Services)
+        {
+            <div class="service-card card" id="@service.Id">
+                <a asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                    <img src="~/ServiceImages/@service.Image" class="service-card-img">
+                </a>
+                <div class="p-3">
+                    <div class="service-card-body">
+                        <img class="service-card-body-img" src="images/1_mk1-6aYaf_Bes1E3Imhc0A.jpeg" height="25" width="25" />
+                        <span class="service-card-body-user">
+                            <span>
+                                @service.User.FirstName
+                            </span>
+                            <span>
+                                @service.User.LastName
+                            </span>
+                        </span>
+                    </div>
+                    <div class="mt-2" style="height: 3vw;">
+                        <a class="service-card-body-preview" asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                            @service.Preview
+                        </a>
+                    </div>
+                    <div class="service-card-rating-body">
+                        <i class="fa fa-star checked service-card-rating-star"></i>
+                        <span class="service-card-rating-value">
+                            5.0
+                        </span>
+                        <span class="service-card-rating-numbers">
+                            (50)
+                        </span>
+                    </div>
+                </div>
+                <div class="service-card-line"></div>
+                <div class="d-flex p-3">
+                    <div class="mr-auto">
+                        <a style="cursor: pointer;" asp-controller="" asp-action="">
+                            <i class="fa fa-heart service-card-heart-icon"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="service-card-price" asp-controller="Service" asp-action="Details" asp-route-id="@service.Id">
+                            <span style="font-size: 14px;">STARTING AT</span>
+                            <span style="font-size: 18px;">$@service.Price</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function openCloseBudgetInterval() {
+        var budgetIntervalContainer = document.getElementById("budget_interval_container");
+
+        if (budgetIntervalContainer.style.display == "none") {
+            budgetIntervalContainer.style.display = "initial";
+        }
+        else {
+            budgetIntervalContainer.style.display = "none";
+        }
+    }
+
+    function openCloseDeliveryTimeContainer() {
+        var deliveryTimeContainer = document.getElementById("delivery_time_container");
+
+        if (deliveryTimeContainer.style.display == "none") {
+            deliveryTimeContainer.style.display = "initial";
+        }
+        else {
+            deliveryTimeContainer.style.display = "none";
+        }
+    }
+
+    $("#apply_budget_button").on("click", function () {
+        let min = $("#budget_min_value").val();
+        let max = $("#budget_max_value").val();
+
+
+    });
+</script>
+
+

@@ -1,0 +1,167 @@
+﻿@model License.Service.Logic.ViewModels.Services.DetailsProjectViewModel
+@using License.Service.Logic.ViewModels.Services 
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/home.css">
+
+<partial name="_CategoriesNavigation" model="@Model.Categories" />
+
+<div class="services-container service-details">
+    <div class="service-left-part">
+        <div class="mb-3">
+            <div class="mb-2">
+                <a class="services-current-page-link mr-1" asp-controller="Service" asp-action="GetAll">
+                    HOME
+                </a>
+                <i class="fa fa-angle-right mr-2"></i>
+
+                <a class="services-current-page-link mr-1" asp-controller="Service" asp-action="GetAll" asp-route-categoryId="@Model.CategoryId">
+                    @Model.CategoryName.ToUpper()
+                </a>
+                <i class="fa fa-angle-right mr-2"></i>
+
+                <a class="services-current-page-link mr-1" asp-controller="Service" asp-action="GetAll" asp-route-categoryId="@Model.SubcategoryId">
+                    @Model.SubcategoryName.ToUpper()
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </div>
+        </div>
+
+        <div class="service-details-preview">@Model.Preview</div>
+
+        <div>
+            <i class="fa fa-clock-o custom-check mb-4"></i>
+            <span class="custom-check">@Model.DeliveryTime</span>
+        </div>
+
+        <img class="service-details-image" src="~/images/1_mk1-6aYaf_Bes1E3Imhc0A.jpeg" />
+
+        <div>
+            <div class="service-details-about-this-post mb-1">
+                About this post
+            </div>
+            <div class="service-details-description">
+                @Html.Raw(Model.Description.Replace("\n", "</br>"))
+            </div>
+        </div>
+    </div>
+
+    <div class="service-right-part">
+        <div class="about-me-custom-message">
+            About me
+        </div>
+        <div class="d-flex">
+            <img class="rounded-image mr-3" src="~/images/1_mk1-6aYaf_Bes1E3Imhc0A.jpeg" width="100" height="100"/>
+
+            <div>
+                <div style="font-size: 15px;">Toma Alexandru</div>
+                <div class="user-description">
+                    @Model.SellerPreview
+                </div>
+                <div class="d-flex">
+                    <div class="mr-1">
+                        <i class="fa fa-star blue-star"></i>
+                        <i class="fa fa-star blue-star"></i>
+                        <i class="fa fa-star blue-star"></i>
+                        <i class="fa fa-star blue-star"></i>
+                        <i class="fa fa-star blue-star"></i>
+                    </div>
+                    <div class="mr-2 blue-star">5</div>
+                    <div>(</div>
+                    <div>300</div>
+                    <div>)</div>
+                </div>
+                <div class="mt-2">   
+                    <a class="contact-me-button" data-toggle="modal" data-target="#contactSellerModal">
+                        Contact me
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="seller-informations-container">
+            <div class="about-me-container">
+                <div class="mb-4">
+                    <div class="about-me-title">From</div>
+                    @if (String.IsNullOrEmpty(Model.SellerCountry))
+                    {
+                        <div class="about-me-message">-</div>
+                    }
+                    else
+                    {
+                        <div class="about-me-message">@Model.SellerCountry</div>
+                    }
+                </div>
+                <div class="mb-4">
+                    <div class="about-me-title">Member since</div>
+                    @if (String.IsNullOrEmpty(Model.SellerMemberSince))
+                    {
+                        <div class="about-me-message">-</div>
+                    }
+                    else
+                    {
+                        <div class="about-me-message">@Model.SellerMemberSince</div>
+                    }
+                </div>
+                <div>
+                    <div class="about-me-title">Last activ</div>
+                    @if (String.IsNullOrEmpty(Model.SellerLastActiveOn))
+                    {
+                        <div class="about-me-message">-</div>
+                    }
+                    else
+                    {
+                        <div class="about-me-message">@Model.SellerLastActiveOn</div>
+                    }
+                </div>
+                <div>
+                    <div class="about-me-title">Last delivery</div>
+                    @if (String.IsNullOrEmpty(Model.SellerLastDelivery))
+                    {
+                        <div class="about-me-message">-</div>
+                    }
+                    else
+                    {
+                        <div class="about-me-message">@Model.SellerLastDelivery</div>
+                    }
+                </div>
+            </div>
+            <div class="service-card-line mt-4 mb-4"></div>
+            <div>
+                @Model.SellerDescription
+            </div>
+        </div>
+
+        <div class="mt-4 contact-seller-wrapper">
+            <a asp-controller="Order" asp-action="StartOrder" asp-route-serviceId="@Model.Id" class="contact-seller-button">
+                Continue ($@Model.Price)
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="contactSellerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Contact seller</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-controller="Service" asp-action="ContactSeller">
+                <div class="modal-body">
+                    <partial name="_ContactSeller" 
+                             model="new ContactSellerViewModel { SellerEmail = Model.SellerEmail, ServiceId = Model.Id}" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

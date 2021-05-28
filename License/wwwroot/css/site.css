@@ -1,0 +1,410 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.category-navigation-bar-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.subcategories-navigation-bar-container {
+    min-height: 10rem;
+    min-width: 10rem;
+    background: red;
+    display: none;
+    position: fixed;
+    margin-top: 40px;
+}
+
+.services-container {
+    z-index: -1;
+    margin-left: 6vw;
+    margin-right: 6vw;
+    padding-top: 2vw;
+}
+
+.services-current-page-link {
+    font-size: 12px;
+    margin-right: 5px;
+    color: black;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.services-current-subcategories-title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.services-current-subcategories-description {
+    color: #95979d;
+    font-size: 18px;
+}
+
+.services-number-results {
+    margin-top: 1rem;
+    margin-left: 5px;
+    color: #7a7d85;
+    font-weight: 600;
+}
+
+.service-card {
+    width: 20vw;
+    margin-right: 1.5vw;
+    margin-bottom: 3vh;
+}
+
+.service-card:hover{
+    transform: scale(1.05);
+}
+
+.service-card-img {
+    width: 20vw;
+    height: 25vh;
+    cursor: pointer;
+}
+
+.service-card-body {
+    display: flex;
+    align-items: center;
+}
+
+.service-card-body-img{
+    border-radius: 50%;
+}
+
+.service-card-body-user {
+    margin-left: 8px;
+    font-size: 13px;
+}
+
+.service-card-body-preview {
+    color: black;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.service-card-rating-body {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.service-card-rating-star {
+    margin-right: 5px;
+    color: #ffbe5b;
+    font-weight: 700;
+}
+
+.service-card-rating-numbers {
+    color: #b5b6ba;
+}
+
+.service-card-rating-value {
+    color: #ffbe5b;
+    font-weight: 700;
+    margin-right: 3px;
+}
+
+.service-card-line {
+    border-bottom: 1px solid #b5b6ba;
+    font-weight: 200;
+}
+
+.service-card-heart-icon {
+    font-size: 16px;
+    color: #b5b6ba;
+}
+
+.service-card-price {
+    color: #62646a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .service-card-price:hover {
+        color: #62646a;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+.service-left-part{
+    width: 47.5vw;
+}
+
+.service-right-part{
+    width: 32.5vw;
+    margin-left: 5vw;
+}
+
+.service-details{
+    display: flex;
+}
+
+.rounded-image{
+    border-radius: 50%;
+}
+
+.blue-star {
+    color: #112147;
+}
+
+.about-me-title {
+    color: #7a7d85;
+}
+
+.about-me-message {
+    color: #2f3030;
+    font-weight: 600;
+}
+
+.about-me-container {
+    display: grid;
+    grid-template-columns: 13vw 13vw;
+}
+
+.seller-informations-container {
+    margin-top: 3vh;
+    padding: 20px 30px;
+    border: 1px solid #e3e2e1;
+}
+
+.contact-seller-button {
+    border-radius: 4px;
+    padding: 12px 8vw;
+    color: white !important;
+    background: #112147;
+    cursor: pointer;
+}
+
+    .contact-seller-button:hover {
+        background: #112147;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+.service-details-preview {
+    font-size: 24px;
+    color: #62646a;
+    margin-bottom: 15px;
+}
+
+.service-details-image {
+    width: 47.5vw;
+    margin-bottom: 25px;
+}
+
+.custom-check {
+    font-weight: 600;
+}
+
+.about-me-custom-message {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.user-description {
+    color: black;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.service-details-about-this-post{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.service-details-description {
+    border: 1px solid #e3e2e1;
+    padding: 20px 25px;
+    margin-bottom: 40px;
+}
+
+.payment-methods-container {
+    width: inherit;
+    background-color: #ffffff;
+    border: .0625rem solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 5px;
+    padding: 30px 45px;
+    margin-bottom: 30px;
+}
+
+.payment-methods-title {
+    font-size: 16px;
+    color: #404145;
+    font-weight: 700;
+}
+
+.payment-methods-types {
+    background: #e6ebe8;
+    padding: 20px;
+}
+
+.margin-two-view-width{
+    margin-right: 2vw;
+}
+
+.form-group-dimension{
+    width: 17.5vw;
+}
+
+.requirments-container {
+    width: inherit;
+    background-color: #ffffff;
+    border: .0625rem solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 5px;
+    padding: 30px 45px;
+    margin-bottom: 30px;
+}
+
+.requirements-textarea {
+    width: 44vw;
+    height: 40vh;
+}
+
+.order-container {
+    padding-top: 8rem;
+    display: flex;
+}
+
+.order-left-container {
+    width: 50vw;
+    margin-left: 10vw;
+    margin-right: 5vw;
+}
+
+.order-right-container {
+    width: 25vw;
+    height: 50vh;
+    background-color: #ffffff;
+    border: .0625rem solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 5px;
+}
+
+.contact-seller-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+}
+
+.confirm-order-button {
+    border-radius: 4px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: white !important;
+    background: #112147;
+    cursor: pointer;
+}
+
+    .confirm-order-button:hover {
+        background: #112147;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        cursor: pointer;
+        color: white !important;
+        text-decoration: none;
+    }
+
+.order-totals {
+    padding: 30px 25px;
+}
+
+.order-totals-service-title {
+    color: #404145;
+    font-weight: 700;
+}
+
+.contact-me-button {
+    border-radius: 4px;
+    padding: 8px;
+    color: white !important;
+    background: #112147;
+    cursor: pointer;
+}
+
+.contact-seller-button:hover {
+    background: #112147;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}

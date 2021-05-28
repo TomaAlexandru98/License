@@ -1,0 +1,80 @@
+﻿@model IEnumerable<License.Models.Models.CategoryModel>
+
+<div style="padding-top: 4rem;">
+    <div style="width: 100vw;
+                    display: grid;
+                    grid-template-columns: repeat(@Model.Count(), 1fr);
+                    align-items: center;
+                    padding-left: 2vw;
+                    padding-right: 2vw;
+                    height: 3rem;">
+        @foreach (var category in Model)
+        {
+            <div style="display: flex; flex-direction: column; height: 3rem;"
+                 onmouseover='showSubcategories("subcategories-container-@category.Id")'
+                 onmouseout='hideSubcategories("subcategories-container-@category.Id")'>
+                <div class="container-categories-item" style="line-height: 24px;">
+                    <a asp-controller="Service"
+                       asp-action="GetAll"
+                       asp-route-categoryId="@category.Id"
+                       style="text-decoration: none; color: black;">
+                        @category.Name
+                    </a>
+                </div>
+                @if (category.Subcategories.Any())
+                {
+                    <div id="subcategories-container-@category.Id"
+                         style="width: 25vw;
+                                    display: none;
+                                    position: fixed;
+                                    margin-top: 3rem;
+                                    background-color: #ffffff;
+                                    border: .0625rem solid #ffffff;
+                                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                    border: 5px;">
+                        <div style="display: grid; grid-template-columns: 10.5vw 10.5vw; flex-wrap: wrap; padding: 1.5vw 2vw 0vw 2vw;">
+                            @foreach (var subcategory in category.Subcategories)
+                            {
+                                <div style="font-size: 1.2rem;
+                                                font-weight: 400;
+                                                height: 3.3vw;
+                                                display: flex;
+                                                margin: auto !important;
+                                                cursor: pointer;"
+                                     id="subcategory-@subcategory.Id"
+                                     onmouseover='addLinkUnderline(this.id)'
+                                     onmouseout='removeLinkUnderline(this.id)'>
+                                    <a asp-controller="Service"
+                                       asp-action="GetAll"
+                                       asp-route-subcategoryId="@subcategory.Id"
+                                       style="color: black;">
+                                        @subcategory.Name
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div style="width: 100vw; border-bottom: 1px solid #a2a4a8;"></div>
+</div>
+
+<script>
+    function showSubcategories(categoryId) {
+        document.getElementById(categoryId).style.display = "initial";
+    }
+
+    function hideSubcategories(categoryId) {
+        document.getElementById(categoryId).style.display = "none";
+    }
+
+    function addLinkUnderline(subcategoryId) {
+        document.getElementById(subcategoryId).style.textDecoration = "underline";
+    }
+
+    function removeLinkUnderline(subcategoryId) {
+        document.getElementById(subcategoryId).style.textDecoration = "none";
+    }
+</script>

@@ -1,0 +1,15 @@
+﻿@model License.Service.Logic.ViewModels.Services.ContactSellerViewModel
+
+<div class="form-group form-group-dimension">
+    <label>Seller Email</label>
+    <input readonly asp-for="SellerEmail" class="form-control" />
+    <span asp-validation-for="SellerEmail" class="text-danger"></span>
+</div>
+
+<div class="form-group form-group-dimension">
+    <label>Message</label>
+    <input asp-for="Message" class="form-control" />
+    <span asp-validation-for="Message" class="text-danger"></span>
+</div>
+
+<input hidden asp-for="ServiceId" />

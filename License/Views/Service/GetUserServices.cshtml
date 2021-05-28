@@ -1,0 +1,219 @@
+﻿@using License.Service.Logic.ViewModels.Services
+@model License.Service.Logic.ViewModels.Services.UserServicesViewModel
+
+@{
+    ViewData["Title"] = "GetUserServices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-top: 6rem; margin: 0 7vw;">
+    <div>
+        <a id="createProjectButton" data-toggle="modal" data-target="#createProjectModal" class="btn btn-primary" style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">Create project</a>
+    </div>
+
+    <div style="width: 84vw; margin-top: 2vw;">
+        <div style="
+        display: flex;
+        background: #ededed;
+        font-size: 14px;
+        text-shadow: none;
+        color: #000;
+        border-radius: 4px;
+        border: 1px solid #bab6b6;
+        padding: 5px 10px;">
+            <div style="width: 45vw;">Project</div>
+            <div style="width: 15vw; text-align: center;">Orders</div>
+            <div style="width: 15vw; text-align: center;">Earnings</div>
+        </div>
+
+        <div>
+            @foreach (var service in Model.Services)
+            {
+                <div style="display: flex; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; border-radius: 4px; border: 1px solid #bab6b6;">
+                    <div style="width: 45vw;">@service.Title</div>
+                    <div style="width: 15vw; text-align: center;">1</div>
+                    <div style="width: 15vw; text-align: center;">100$</div>
+                    <div style="width: 9vw; padding-left: 5vw;">
+                        <a style="cursor: pointer; margin-right: 5px; color: #112147; text-decoration: none;" asp-controller="Service" asp-action="GetUserServiceDetails" asp-route-serviceId="@service.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a style="cursor: pointer; color: #112147; text-decoration: none;" asp-controller="Service" asp-action="Delete" asp-route-serviceId="@service.Id">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade"
+     id="createProjectModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Create project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-controller="Service" asp-action="Post" method="post" id="create_project_form" enctype="multipart/form-data">
+                <div class="modal-body" style="height: 25rem;">
+                    <partial name="_CreateProject" model="@new CreateProjectViewModel()" />
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-primary"
+                            id="createProjectPreviousButton"
+                            onclick="onButtonPrevious()"
+                            style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            id="createProjectNextButton"
+                            onclick="onButtonNext()"
+                            style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">
+                        Next
+                    </button>
+                    <button type="submit"
+                            id="createProjectSaveButton"
+                            form="create_project_form"
+                            class="btn btn-primary"
+                            style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        var createProjectWizardStep = 1;
+        var categoriesDropDownId = "categories_drop_down";
+        var subcategoriesDropDownId = "subcategories_drop_down";
+
+        $("#createProjectButton").on("click", function () {
+            $("#createProjectPriceId").val("");
+            adjustCreateProjectWizard();
+            loadCategories();
+        });
+
+        function onButtonNext() {
+            createProjectWizardStep++;
+            adjustCreateProjectWizard();
+        }
+
+        function onButtonPrevious() {
+            createProjectWizardStep--;
+            adjustCreateProjectWizard();
+        }
+
+        function adjustCreateProjectWizard() {
+            adjustCreateProjectWizardPages();
+            adjustCreateProjectWizardButtons();
+        }
+
+        function adjustCreateProjectWizardButtons() {
+            if (createProjectWizardStep == 1) {
+                $("#createProjectSaveButton").css("display", "none");
+                $("#createProjectPreviousButton").css("display", "none");
+                $("#createProjectNextButton").css("display", "block");
+            }
+
+            if (createProjectWizardStep == 2) {
+                $("#createProjectSaveButton").css("display", "none");
+                $("#createProjectPreviousButton").css("display", "block");
+                $("#createProjectNextButton").css("display", "block");
+            }
+
+            if (createProjectWizardStep == 3) {
+                $("#createProjectSaveButton").css("display", "block");
+                $("#createProjectPreviousButton").css("display", "block");
+                $("#createProjectNextButton").css("display", "none");
+            }
+        }
+
+        function adjustCreateProjectWizardPages() {
+            if (createProjectWizardStep == 1) {
+                $("#first_step_wizard").css("display", "block");
+                $("#second_step_wizard").css("display", "none");
+                $("#thrid_step_wizard").css("display", "none");
+            }
+
+            if (createProjectWizardStep == 2) {
+                $("#first_step_wizard").css("display", "none");
+                $("#second_step_wizard").css("display", "block");
+                $("#thrid_step_wizard").css("display", "none");
+            }
+
+            if (createProjectWizardStep == 3) {
+                $("#first_step_wizard").css("display", "none");
+                $("#second_step_wizard").css("display", "none");
+                $("#thrid_step_wizard").css("display", "block");
+            }
+        }
+
+        //preview image
+        document.getElementById('files').onchange = function () {
+            var src = URL.createObjectURL(this.files[0])
+            document.getElementById('image').src = src
+        }
+
+        function loadCategories() {
+            $.ajax({
+                url: "/Category/GetData",
+                method: "get",
+                success: function (data) {
+                    addDataToDropDown(data, categoriesDropDownId);
+                    loadSubcategories(data[0].id);
+                }
+            });
+        }
+
+        document.getElementById(categoriesDropDownId).onchange = function () {
+            var selectedCategoryId = document.getElementById(categoriesDropDownId).value;
+            loadSubcategories(selectedCategoryId);
+        }
+
+        function addDataToDropDown(data, dropDownId) {
+            var dropDown = document.getElementById(dropDownId);
+            for (let i = 0; i < data.length; i++) {
+                var option = createOptionTag(data[i].id, data[i].name);
+                dropDown.appendChild(option);
+            }
+        }
+
+        function clearDataFromDropDown(dropDownId) {
+            var dropDown = document.getElementById(dropDownId);
+            dropDown.innerHTML = "";
+        }
+
+        function createOptionTag(id, name) {
+            var option = document.createElement("option");
+            option.value = id;
+            option.innerHTML = name;
+            return option;
+        }
+
+        function loadSubcategories(categoryId) {
+            $.ajax({
+                url: "/Subcategory/GetData?categoryId=" + categoryId,
+                method: "get",
+                success: function (data) {
+                    clearDataFromDropDown(subcategoriesDropDownId);
+                    addDataToDropDown(data, subcategoriesDropDownId);
+                }
+            });
+        }
+    </script>
+}

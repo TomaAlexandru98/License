@@ -1,0 +1,60 @@
+﻿@using License.Models.Models 
+@model License.Service.Logic.ViewModels.Services.CreateProjectViewModel
+
+<div id="first_step_wizard">
+    <div class="form-group form-group-dimension">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group-dimension">
+        <label asp-for="Preview"></label>
+        <input asp-for="Preview" class="form-control" />
+        <span asp-validation-for="Preview" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group-dimension">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" style="height: 15vh;"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+
+<div id="second_step_wizard">
+    <div class="form-group form-group-dimension">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" id="createProjectPriceId" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group-dimension">
+        <label>Delivery Time</label>
+        </br>
+        <select asp-for="DeliveryTime" class="form-control">
+            <option selected value="@DeliveryTime.LessThanADay">Less than a day</option>
+            <option value="@DeliveryTime.OneDay">One day</option>
+            <option value="@DeliveryTime.ThreeDays">Three day</option>
+            <option value="@DeliveryTime.SevenDays">Seven day</option>
+        </select>
+        <span asp-validation-for="DeliveryTime" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group-dimension">
+        <label>Category</label>
+        </br>
+        <select asp-for="CategoryId" id="categories_drop_down" class="form-control"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group-dimension">
+        <label>Subcategory</label>
+        </br>
+        <select asp-for="SubcategoryId" id="subcategories_drop_down"  class="form-control"></select>
+        <span asp-validation-for="SubcategoryId" class="text-danger"></span>
+    </div>
+</div>
+
+<div id="thrid_step_wizard">
+    <form runat="server">
+        <input asp-for="Image" accept="image/*" type='file' id="files" style="position: fixed;"/>
+        <div>
+            <img id="image" src="#" alt="your image" height="350" width="450"/>
+        </div>
+    </form>
+</div>

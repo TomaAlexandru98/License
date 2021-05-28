@@ -1,0 +1,22 @@
+﻿.main-container{
+    padding-top: 4rem;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.form-group-dimension{
+    width: 30vw;
+}
+
+.login-button {
+    color: white !important;
+    background: #112147 !important;
+    padding: 0.5rem 1rem !important;
+}

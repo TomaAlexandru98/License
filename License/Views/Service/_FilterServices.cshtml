@@ -1,0 +1,90 @@
+﻿<div style="display: flex; margin-top: 1.5rem;">
+    <div class="budget-container">
+        <div style="display: flex; padding: 6px 12px;" onclick="openCloseBudgetInterval()">
+            <span class="mr-3">Budget</span>
+            <i class="fa fa-angle-down" style="font-size: 16px;"></i>
+        </div>
+        <div id="budget_interval_container" class="budget-interval-container">
+            <div style="display: flex;">
+                <div class="form-group mr-4">
+                    <label>Min.</label>
+                    <input class="form-control" id="budget_min_value"/>
+                </div>
+                <div class="form-group">
+                    <label>Max.</label>
+                    <input class="form-control" id="budget_max_value"/>
+                </div>
+            </div>
+            <div class="form-group mt-2" style="border-bottom: 1px solid #a2a4a8;"></div>
+            <div class="d-flex justify-content-end">
+                <a class="apply-filter-button" id="apply_budget_button">Apply</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="budget-container">
+        <div style="display: flex; padding: 6px 12px;" onclick="openCloseDeliveryTimeContainer()">
+            <span class="mr-3">Delivery Time</span>
+            <i class="fa fa-angle-down" style="font-size: 16px;"></i>
+        </div>
+        <div id="delivery_time_container" class="budget-interval-container">
+            <div style="display: flex; flex-direction: column">
+                <div class="d-flex mb-2" style="align-items: center;">
+                    <input class="mr-2" type="radio" style="transform: scale(1.4)" />
+                    <span>Less than one day</span>
+                </div>
+                <div class="d-flex mb-2" style="align-items: center;">
+                    <input class="mr-2" type="radio" style="transform: scale(1.4)" />
+                    <span>One day</span>
+                </div>
+                <div class="d-flex mb-2" style="align-items: center;">
+                    <input class="mr-2" type="radio" style="transform: scale(1.4)" />
+                    <span>Three days</span>
+                </div>
+                <div class="d-flex" style="align-items: center;">
+                    <input class="mr-2" type="radio" style="transform: scale(1.4)" />
+                    <span>Seven days</span>
+                </div>
+            </div>
+            <div class="form-group mt-2" style="border-bottom: 1px solid #a2a4a8;"></div>
+            <div class="d-flex justify-content-end">
+                <a class="apply-filter-button">Apply</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .budget-container {
+        border: 1px solid #dadbdd;
+        border-radius: 4px;
+        color: #222325;
+        font-weight: 600;
+        margin-right: 10px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .budget-interval-container {
+        width: 15vw;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        margin-top: 3rem;
+        background-color: #ffffff;
+        border: .0625rem solid #ffffff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border: 5px;
+        padding: 0.7vw 1.3vw;
+    }
+
+    .apply-filter-button {
+        border-radius: 4px;
+        padding: 6px 10px;
+        color: white !important;
+        background: #112147;
+        cursor: pointer;
+    }
+</style>

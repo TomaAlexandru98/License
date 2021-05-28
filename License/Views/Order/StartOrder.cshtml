@@ -1,0 +1,86 @@
+﻿@model License.Service.Logic.ViewModels.Orders.CreateOrderViewModel
+
+@{
+    ViewData["Title"] = "StartOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Order" asp-action="Pay">
+    <div class="order-container">
+        <div class="order-left-container">
+            <div class="payment-methods-container">
+                <div class="payment-methods-title">Payment Options</div>
+                <div class="service-card-line mt-3 mb-4"></div>
+                <div class="payment-methods-types">
+                    <input type="radio" checked />
+                    <span>Credit & Debit Card</span>
+                </div>
+                <div class="payment-card-container mt-4">
+                    <div class="d-flex">
+                        <div class="form-group form-group-dimension margin-two-view-width">
+                            <label>First Name</label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-group-dimension">
+                            <label>Last Name</label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        <div class="form-group form-group-dimension margin-two-view-width">
+                            <label>Card Number</label>
+                            <input asp-for="CardNumber" class="form-control" />
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group" style="width: 8vw; margin-right: 1.5vw;">
+                            <label>Expiration Date</label>
+                            <input asp-for="ExpirationDate" class="form-control" />
+                            <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group" style="width: 8vw;">
+                            <label>Security Code</label>
+                            <input asp-for="SecurityCode" class="form-control" />
+                            <span asp-validation-for="SecurityCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="requirments-container">
+                <div class="payment-methods-title">Requirements</div>
+                <textarea asp-for="Requirements" class="mt-2 requirements-textarea"></textarea>
+                <span asp-validation-for="Requirements" class="text-danger"></span>
+            </div>
+
+            <input hidden asp-for="@Model.ServiceId" />
+        </div>
+
+        <div class="order-right-container">
+            <div class="order-totals">
+                <div class="d-flex">
+                    <img class="mr-3" src="~/images/1_mk1-6aYaf_Bes1E3Imhc0A.jpeg" width="75" height="75" />
+                    <div class="order-totals-service-title">I Will Write Best Shopify Product Description With SEO Title</div>
+                </div>
+                <div class="service-card-line mt-5 mb-5"></div>
+                <div>
+                    <div class="d-flex mb-3">
+                        <div class="mr-auto">Total</div>
+                        <div class="font-weight-bold">$10.83</div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="mr-auto mb-2">Total Delivery Time</div>
+                        <div class="font-weight-bold">2 days</div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-seller-wrapper">
+                <input type="submit" class="confirm-order-button" value="Confirm & Pay" />
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,121 @@
+﻿@using License.Service.Logic.ViewModels.Subcategories
+@model License.Service.Logic.ViewModels.Subcategories.SubcategoriesViewModel
+
+@{
+    ViewData["Title"] = "Get";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/Responsive-2.2.3/css/responsive.bootstrap4.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/Responsive-2.2.3/css/responsive.dataTables.min.css" />
+
+
+<div style="padding-top: 6rem; margin: 0 7vw 3vw 7vw;">
+    <div style="margin-bottom: 2rem;">
+        <a data-toggle="modal" data-target="#createSubcategoryModal" class="btn btn-primary"
+           style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">Create subcategory</a>
+    </div>
+
+    <table id="subcategories_table" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="78vw">Subcategory</th>
+                <th width="3vw"></th>
+                <th width="3vw"></th>
+            </tr>
+        </thead>
+        @foreach (var subcategory in Model.Subcategories)
+        {
+            <tr>
+                <td>@subcategory.Name</td>
+                <td>
+                    <a data-toggle="modal" data-target="#editSubcategoryModal" class="btn btn-primary"
+                       style="color: white; background: #112147; padding: 0.5rem 1.5rem; cursor: pointer;"
+                       onclick='openEditSubcategoryModal("@subcategory.Id", "@Model.Category.Id")'>Edit</a>
+                </td>
+                <td>
+                    @if (subcategory.IsBlocked)
+                    {
+                        <a class="btn btn-primary"
+                           style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;"
+                           asp-controller="Subcategory" asp-action="Unblock"
+                           asp-route-subcategoryId="@subcategory.Id" asp-route-categoryId="@Model.Category.Id">Unblock</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary"
+                           style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;"
+                           asp-controller="Subcategory" asp-action="Block"
+                           asp-route-subcategoryId="@subcategory.Id" asp-route-categoryId="@Model.Category.Id">Block</a>
+                    }
+                </td>
+            </tr>
+        }
+        <tbody>
+        </tbody>
+    </table>
+
+
+    <div class="modal fade" id="createSubcategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create subcategory</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form asp-controller="Subcategory" asp-action="Post">
+                    <div class="modal-body">
+                        <partial name="_Create"
+                                 model="@new CreateSubcategoryViewModel { CategoryName = Model.Category.Name, CategoryId = Model.Category.Id }" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="color: white; background: #112147; padding: 0.5rem 1rem; cursor: pointer;">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editSubcategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit subcategory</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editSubcategoryForm" asp-controller="Subcategory" asp-action="Edit"></form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/lib/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="~/lib/datatables/Responsive-2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#subcategories_table').DataTable({ responsive: true, "lengthMenu": [5, 10, 25, 50] });
+        });
+
+        function openEditSubcategoryModal(subcategoryId, categoryId) {
+            $.ajax({
+                url: "/Subcategory/Edit?subcategoryId=" + subcategoryId + "&categoryId=" + categoryId,
+                method: "GET",
+                success: function (result) {
+                    $("#editSubcategoryForm").html(result);
+                }
+            });
+        }
+
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

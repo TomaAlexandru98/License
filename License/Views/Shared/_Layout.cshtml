@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - License</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <div class="d-flex" style="width: 100vw; height: 4rem; background: #112147; position: fixed; align-items: center; padding-left: 7vw; padding-right: 7vw; z-index: 1 !important;">
+            <div class="mr-auto d-flex" style="align-items: center;">
+                <div style="color: white; font-size: 26px; margin-right: 1rem; cursor: pointer;">
+                    <a style="color: white; text-decoration: none;" asp-controller="Service" asp-action="GetAll">IS Business</a>
+                </div>
+                <div style="margin-right: 16px;">
+                    <form class="form-inline" asp-controller="" asp-action="">
+                        <input name="filter" style="width: 20vw;" class="form-control" type="search" placeholder="Search for services..." aria-label="Search">
+                        <button type="submit" class="btn ml-1" style="cursor: pointer; background: white;">
+                            <i class="fa fa-search" style="font-size:24px; color: #112147;"></i>
+                        </button>
+                    </form>
+                </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-controller="Service" asp-action="GetUserServices">Wishlist</a>
+                    </div>
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-controller="Service" asp-action="GetUserServices">Projects</a>
+                    </div>
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-area="Identity" asp-page="/Account/Login">Orders</a>
+                    </div>
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-controller="Category" asp-action="Get">Categories</a>
+                    </div>
+                }
+            </div>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                    <a style="color: white; text-decoration: none;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                </div>
+                <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" style="color: white; font-size: 18px;" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex">
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </div>
+                    <div style="color: white; font-size: 18px; margin-right: 12px; cursor: pointer;">
+                        <a style="color: white; text-decoration: none;" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

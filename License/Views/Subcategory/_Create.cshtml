@@ -1,0 +1,20 @@
+﻿@model License.Service.Logic.ViewModels.Subcategories.CreateSubcategoryViewModel
+
+<div class="form-group form-group-dimension">
+    <label>Category</label>
+    <input readonly asp-for="CategoryName" class="form-control" />
+    <span asp-validation-for="CategoryName" class="text-danger"></span>
+</div>
+
+<div class="form-group form-group-dimension">
+    <label>Name</label>
+    <input asp-for="SubcategoryName" class="form-control" />
+    <span asp-validation-for="SubcategoryName" class="text-danger"></span>
+</div>
+<div class="form-group form-group-dimension">
+    <label>Description</label>
+    <input asp-for="SubcategoryDescription" class="form-control" />
+    <span asp-validation-for="SubcategoryDescription" class="text-danger"></span>
+</div>
+
+<input hidden asp-for="CategoryId"/>
